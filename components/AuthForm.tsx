@@ -7,7 +7,6 @@ import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
-import { log } from "util";
 import FormField from "./FormField";
 import { useRouter } from "next/navigation";
 

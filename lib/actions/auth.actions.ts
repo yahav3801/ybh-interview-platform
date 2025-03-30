@@ -91,3 +91,21 @@ export async function isAuthenticated() {
 
   return !!user;
 }
+
+export async function signOut() {
+  try {
+    const cookieStore = await cookies();
+    cookieStore.set("session", "", {
+      expires: new Date(0),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      sameSite: "lax",
+    });
+
+    return { success: true, message: "Signed out successfully" };
+  } catch (error) {
+    console.error("Error in sign out:", error);
+    return { success: false, message: "Failed to sign out" };
+  }
+}

@@ -1,8 +1,8 @@
 "use client";
 import { interviewer } from "@/constants";
+import { createFeedback } from "@/lib/actions/general.action";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
-import { error } from "console";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -68,7 +68,11 @@ const Agent = ({
     const handleGenerateFeedback = async (messages: SavedMessage[]) => {
       console.log("generate feedback here");
 
-      const { success, id } = { success: true, id: "feedback-id" };
+      const { success, feedbackId: id } = await createFeedback({
+        interviewId: interviewId!,
+        userId: userId!,
+        transcript: messages,
+      });
 
       if (success && id) {
         router.push(`/interview/${interviewId}/feedback`);
@@ -86,7 +90,7 @@ const Agent = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages, callStatus, type, userId]);
+  }, [messages, callStatus, type, userId, interviewId, router]);
 
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);

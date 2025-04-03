@@ -89,7 +89,6 @@ const Agent = ({
         handleGenerateFeedback(messages);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages, callStatus, type, userId, interviewId, router]);
 
   const handleCall = async () => {

@@ -94,6 +94,15 @@ const Agent = ({
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
     if (type === "generate") {
+      console.log("=== GENERATION CALL DEBUG ===");
+      console.log("Workflow ID:", process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID);
+      console.log("Username being passed:", userName);
+      console.log("UserID being passed:", userId);
+      console.log("Variable values:", {
+        username: userName,
+        userid: userId,
+      });
+      console.log("================================");
       await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
         variableValues: {
           username: userName,
